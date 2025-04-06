@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const dbPath = path.join(__dirname, '../../data/mock_db.json');
 
-// Load tickets from the JSON file
+
 const tickets = require('../../data/mock_db.json');
 
 function saveToFile() {
@@ -41,7 +41,7 @@ const ticket_service = {
   },
 
   delete(id) {
-    console.log('Deleting ticket with ID:', id); // ✅ Add this line
+    console.log('Deleting ticket with ID:', id); 
 
     const index = tickets.findIndex(ticket => ticket.id === id);
     if (index !== -1) {
@@ -53,7 +53,7 @@ const ticket_service = {
 }
 };
 
-// Helper to generate a simple unique ID
+
 function generateId() {
   return Math.random().toString(36).substr(2, 9);
 }

@@ -36,14 +36,14 @@ router.get('/edit/:id', (req, res) => {
   });
 });
 
-// UPDATE - Handle form submit for updating ticket
+
 router.post('/update/:id', (req, res) => {
   const { title, author, genre, rating } = req.body;
   ticket_service.update(req.params.id, { title, author, genre, rating });
   res.redirect('/');
 });
 
-// DELETE
+
 router.post('/delete/:id', (req, res) => {
   ticket_service.delete(req.params.id);
   res.redirect('/');

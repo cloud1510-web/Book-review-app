@@ -29,7 +29,7 @@ const ticket_controller = {
     }
   },
 
-  remove(req, res) { // <-- make sure it's remove
+  remove(req, res) { 
     const result = ticket_service.delete(req.params.id);
     if (result.ticket) {
       res.json(result);
@@ -39,4 +39,4 @@ const ticket_controller = {
   }
 };
 
-module.exports = ticket_controller; // ✅ This line is critical
+module.exports = ticket_controller; 

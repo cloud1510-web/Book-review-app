@@ -15,7 +15,7 @@ const ticketRoutes = require('./routes/api/ticket');
 app.use('/api/ticket', ticketRoutes);
 
 const webRoutes = require('./routes/web/home');
-app.use('/', webRoutes); // for your homepage
+app.use('/', webRoutes); 
 
 app.use(express.urlencoded({ extended: true }));
 
