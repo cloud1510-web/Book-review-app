@@ -1,35 +1,28 @@
-include ../head.pug
-body
-    .container.mt-5
-      h1 List
-      table.table.table-responsive.table-hover.table-striped.table-dark
-        thead
-          tr
-            th(scope="col") ID
-            th(scope="col") Event Name
-            th(scope="col") Event DateTime
-            th(scope="col") Venue
-            th(scope="col") Contact Phone
-            th(scope="col") Seat
-            th(scope="col") Actions
-        tbody
-          tr
-            td 1
-            td Example Event Name 1
-            td 2024-02-17 10:00
-            td Example Venue
-            td +1234567890
-            td 42
-            td
-              button.btn.btn-primary.btn-sm Edit
-              button.btn.btn-danger.btn-sm Delete
-          tr
-            td 1
-            td Example Event Name 2
-            td 2024-02-17 10:00
-            td Example Venue
-            td +1234567890
-            td 42
-            td
-              button.btn.btn-primary.btn-sm Edit
-              button.btn.btn-danger.btn-sm Delete
+extends ../head.pug
+
+block content
+  h1 Book Review List
+
+  a(href="/add") Add New Book Review
+
+  table(border="1", cellpadding="10", cellspacing="0", style="margin-top: 20px; width: 100%; border-collapse: collapse;")
+    thead(style="background: #f0f0f0;")
+      tr
+        th Title
+        th Author
+        th Genre
+        th Rating
+        th Actions
+    tbody
+      each ticket in tickets
+        tr
+          td #{ticket.title}
+          td #{ticket.author}
+          td #{ticket.genre}
+          td #{ticket.rating}
+          td
+            form(action=`/delete/${ticket.id}`, method="POST", style="display: inline;")
+              button(type="submit", style="margin-right: 8px; background-color: crimson; color: white; border: none; padding: 5px 10px; cursor: pointer;") Delete
+            a(href=`/edit/${ticket.id}`, style="background-color: royalblue; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px;") Edit
+
+  script(src="/scripts.js")

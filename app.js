@@ -1,28 +1,25 @@
-// express web app instance
-const express = require('express')
-
-// parse request body to json
-const body_parser = require('body-parser')
-
-// for File IO
-const path = require('path')
-
-// for web routing
-const web_route = require('./routes/web')
-
-// make mock database (raw .json file) available globally in app
-global.mock_db = path.join(__dirname, './data/mock_db.json');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-// Set the view engine for web routes
 app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
-app.use('/css', express.static('public/css'))
-app.use('/js', express.static('public/js'))
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', web_route); // web routes
+const ticketRoutes = require('./routes/api/ticket');
+app.use('/api/ticket', ticketRoutes);
 
-const port = 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const webRoutes = require('./routes/web/home');
+app.use('/', webRoutes); // for your homepage
 
+app.use(express.urlencoded({ extended: true }));
+
+
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
