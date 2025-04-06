@@ -1,28 +1,103 @@
 extends ../head.pug
 
 block content
-  h1 Book Review List
+  style.
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color:rgb(7, 32, 57);
+    }
 
-  a(href="/add") Add New Book Review
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
 
-  table(border="1", cellpadding="10", cellspacing="0", style="margin-top: 20px; width: 100%; border-collapse: collapse;")
-    thead(style="background: #f0f0f0;")
-      tr
-        th Title
-        th Author
-        th Genre
-        th Rating
-        th Actions
-    tbody
-      each ticket in tickets
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .add-button {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 30px auto;
+      background-color: #28a745;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solidrgb(57, 28, 28);
+    }
+
+    thead {
+      background-color:rgb(7, 32, 57);
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      margin-right: 8px;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      border: none;
+    }
+
+    .btn-edit {
+      background-color: #007bff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+  .container
+    h1 Book Review List
+
+    a.add-button(href="/add") Add New Book Review
+
+    table
+      thead
         tr
-          td #{ticket.title}
-          td #{ticket.author}
-          td #{ticket.genre}
-          td #{ticket.rating}
-          td
-            form(action=`/delete/${ticket.id}`, method="POST", style="display: inline;")
-              button(type="submit", style="margin-right: 8px; background-color: crimson; color: white; border: none; padding: 5px 10px; cursor: pointer;") Delete
-            a(href=`/edit/${ticket.id}`, style="background-color: royalblue; color: white; padding: 5px 10px; text-decoration: none; border-radius: 3px;") Edit
+          th Title
+          th Author
+          th Genre
+          th Rating
+          th Actions
+      tbody
+        each ticket in tickets
+          tr
+            td #{ticket.title}
+            td #{ticket.author}
+            td #{ticket.genre}
+            td #{ticket.rating}
+            td
+              form(action=`/delete/${ticket.id}`, method="POST", style="display:inline")
+                button.btn.btn-delete(type="submit") Delete
+              a.btn.btn-edit(href=`/edit/${ticket.id}`) Edit
 
   script(src="/scripts.js")
